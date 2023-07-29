@@ -1,4 +1,3 @@
-# rbxutility.
-
-## This repository is used for holding LoadLibrary/RbxUtility.
-You may commit to this if you show that you are trustworthy enough.
+# RbxUtility (Updated)
+## This repository was created solely for the purpose of hosting an updated version of RbxUtility/LoadLibrary
+### RbxUtility is required in many old ROBLOX games from 2010-2015.
