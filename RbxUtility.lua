@@ -9,7 +9,7 @@
 
 
 -- Descendant of LoadLibrary RbxUtility.
- --JSON Encoder and Parser for Lua 5.4.4 and Luau
+ --JSON Encoder and Parser for Lua 5.4.4 and LuaU (Roblox)
  --
  --Copyright 2007 Shaun Brown  (https://www.chipmunkav.com)
  --All Rights Reserved.
