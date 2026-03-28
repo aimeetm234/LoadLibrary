@@ -393,12 +393,7 @@ local function findConfigAtMouseTarget(Mouse, stampData)
 	local minBB, maxBB = getBoundingBox2(stampData.CurrentParts)
 	local diagBB = maxBB - minBB
 
-	local insertCFrame
-	if stampData.CurrentParts:IsA("Model") or stampData.CurrentParts:IsA("Tool") then
-		insertCFrame = stampData.CurrentParts:GetPivot()
-	else
-		insertCFrame = stampData.CurrentParts.CFrame
-	end
+	local insertCFrame = stampData.CurrentParts:GetPivot()
 
 	if Mouse then
 		if stampData.CurrentParts:IsA("Tool") then
@@ -1060,12 +1055,7 @@ t.SetupStamperDragger = function(modelToStamp, Mouse, StampInModel, AllowedStamp
 		local minBB, maxBB = getBoundingBoxInWorldCoordinates(stampData.CurrentParts)
 
 		-- need to offset by distance to be dragged
-		local currModelCFrame = nil
-		if stampData.CurrentParts:IsA("Model") then
-			currModelCFrame = stampData.CurrentParts:GetPivot()
-		else
-			currModelCFrame = stampData.CurrentParts.CFrame
-		end
+		local currModelCFrame = stampData.CurrentParts:GetPivot()
 
 		minBB = minBB + targetCFrame.Position - currModelCFrame.Position
 		maxBB = maxBB + targetCFrame.Position - currModelCFrame.Position
@@ -1819,9 +1809,7 @@ t.SetupStamperDragger = function(modelToStamp, Mouse, StampInModel, AllowedStamp
 			-- if targetCFrame is inside cluster, just set that cell to 1 and return
 			--local cellPos = cluster:WorldToCell(targetCFrame.Position)
 
-			local cellPos
-			if stampData.CurrentParts:IsA("Model") then cellPos = cluster:WorldToCell(stampData.CurrentParts:GetPivot().Position)
-			else cellPos = cluster:WorldToCell(stampData.CurrentParts.CFrame.Position) end
+			local cellPos = cluster:WorldToCell(stampData.CurrentParts:GetPivot().Position)
 
 			local cMax = game:GetService("Workspace").Terrain.MaxExtents.Max
 			local cMin = game:GetService("Workspace").Terrain.MaxExtents.Min
@@ -2050,11 +2038,7 @@ t.SetupStamperDragger = function(modelToStamp, Mouse, StampInModel, AllowedStamp
 		if unjoinableTag then
 			for unjoinableSurface in string.gmatch(unjoinableTag.Value, "[^,]*") do
 				if tonumber(unjoinableSurface) then
-					if clone:IsA("Model") then
-						prepareUnjoinableSurfaces(clone:GetPivot(), parts, tonumber(unjoinableSurface))
-					else
-						prepareUnjoinableSurfaces(clone.CFrame, parts, tonumber(unjoinableSurface))
-					end
+					prepareUnjoinableSurfaces(clone:GetPivot(), parts, tonumber(unjoinableSurface))
 				end
 			end
 		end
