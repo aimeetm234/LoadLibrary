@@ -140,7 +140,7 @@ t.CreateStyledMessageDialog = function(title, message, style, buttons)
 	titleLabel.Text = title
 	titleLabel.TextStrokeTransparency = 0
 	titleLabel.BackgroundTransparency = 1
-	titleLabel.TextColor3 = Color3.new(221/255,221/255,221/255)
+	titleLabel.TextColor3 = Color3.fromRGB(221,221,221)
 	titleLabel.Position = UDim2.new(0, 80, 0, 0)
 	titleLabel.Size = UDim2.new(1, -80, 0, 40)
 	titleLabel.Font = Enum.Font.ArimoBold
@@ -153,7 +153,7 @@ t.CreateStyledMessageDialog = function(title, message, style, buttons)
 	messageLabel.Name = "Message"
 	messageLabel.Text = message
 	messageLabel.TextStrokeTransparency = 0
-	messageLabel.TextColor3 = Color3.new(221/255,221/255,221/255)
+	messageLabel.TextColor3 = Color3.fromRGB(221,221,221)
 	messageLabel.Position = UDim2.new(0.025, 80, 0, 45)
 	messageLabel.Size = UDim2.new(0.95, -80, 0, 55)
 	messageLabel.BackgroundTransparency = 1
@@ -181,7 +181,7 @@ t.CreateMessageDialog = function(title, message, buttons)
 	titleLabel.Name = "Title"
 	titleLabel.Text = title
 	titleLabel.BackgroundTransparency = 1
-	titleLabel.TextColor3 = Color3.new(221/255,221/255,221/255)
+	titleLabel.TextColor3 = Color3.fromRGB(221,221,221)
 	titleLabel.Position = UDim2.new(0, 0, 0, 0)
 	titleLabel.Size = UDim2.new(1, 0, 0.15, 0)
 	titleLabel.Font = Enum.Font.ArimoBold
@@ -193,7 +193,7 @@ t.CreateMessageDialog = function(title, message, buttons)
 	local messageLabel = Instance.new("TextLabel")
 	messageLabel.Name = "Message"
 	messageLabel.Text = message
-	messageLabel.TextColor3 = Color3.new(221/255,221/255,221/255)
+	messageLabel.TextColor3 = Color3.fromRGB(221,221,221)
 	messageLabel.Position = UDim2.new(0.025, 0, 0.175, 0)
 	messageLabel.Size = UDim2.new(0.95, 0, .55, 0)
 	messageLabel.BackgroundTransparency = 1
@@ -261,7 +261,7 @@ t.CreateScrollingDropDownMenu = function(onSelectedCallback, size, position, bas
 
 	local function onEntrySelected()
 		icon.Rotation = 0
-		scrollingBackground:TweenSize(UDim2.new(1, 0, 0, currentSelectionName.AbsoluteSize.y), Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, 0.15, true)
+		scrollingBackground:TweenSize(UDim2.new(1, 0, 0, currentSelectionName.AbsoluteSize.Y), Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, 0.15, true)
 		--
 		listMenu.ScrollBarThickness = 0
 		listMenu:TweenSize(UDim2.new(1, -16, 0, 24), Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, 0.15, true, function()
@@ -367,7 +367,7 @@ t.CreateScrollingDropDownMenu = function(onSelectedCallback, size, position, bas
 
 		scrollingBackground = Instance.new('TextButton')
 		scrollingBackground.Name = "ScrollingBackground"
-		scrollingBackground.Size = UDim2.new(1, 0, 0, currentSelectionName.AbsoluteSize.y)
+		scrollingBackground.Size = UDim2.new(1, 0, 0, currentSelectionName.AbsoluteSize.Y)
 		scrollingBackground.Position = UDim2.new(0, 0, 0, 28)
 		scrollingBackground.BackgroundColor3 = Color3.new(1, 1, 1)
 		scrollingBackground.Style = Enum.ButtonStyle.RobloxRoundDropdownButton
@@ -610,7 +610,7 @@ t.CreateDropDownMenu = function(items, onSelect, forRoblox, whiteSkin, baseZ)
 						foundItem = true			
 						scrollBarPosition = childNum						
 						if (whiteSkin) then
-							obj.TextColor3 = Color3.new(90/255,142/255,233/255)
+							obj.TextColor3 = Color3.fromRGB(90,142,233)
 						end
 					else
 						obj.Font = Enum.Font.Arimo
@@ -812,7 +812,7 @@ t.GetFontHeight = function(font, TextSize)
 	if font == nil or TextSize == nil then
 		error("Font and TextSize must be non-nil")
 	end
-	
+
 	-- Clever hack to extract the size from the enum itself.
 	local TextSizeInt = 
 		type(TextSize) == 'number' and TextSize 
@@ -972,7 +972,7 @@ t.CreateSlider = function(steps,width,position)
 	else
 		bar.Size = UDim2.new(0,200,0,5)
 	end
-	bar.BorderColor3 = Color3.new(95/255,95/255,95/255)
+	bar.BorderColor3 = Color3.fromRGB(95,95,95)
 	bar.ZIndex = 2
 	bar.Parent = sliderGui
 
@@ -1329,18 +1329,18 @@ t.CreateTrueScrollingFrame = function()
 	local function positionScrollBar(x,y,offset)
 		local oldPos = scrollbar.Position
 
-		if y < scrollTrack.AbsolutePosition.y then
+		if y < scrollTrack.AbsolutePosition.Y then
 			scrollbar.Position = UDim2.new(scrollbar.Position.X.Scale,scrollbar.Position.X.Offset,0,0)
 			return (oldPos ~= scrollbar.Position)
 		end
 
 		local relativeSize = scrollbar.AbsoluteSize.Y/scrollTrack.AbsoluteSize.Y
 
-		if y > (scrollTrack.AbsolutePosition.y + scrollTrack.AbsoluteSize.y) then
+		if y > (scrollTrack.AbsolutePosition.Y + scrollTrack.AbsoluteSize.Y) then
 			scrollbar.Position = UDim2.new(scrollbar.Position.X.Scale,scrollbar.Position.X.Offset,1 - relativeSize,0)
 			return (oldPos ~= scrollbar.Position)
 		end
-		local newScaleYPos = (y - scrollTrack.AbsolutePosition.y - offset)/scrollTrack.AbsoluteSize.y
+		local newScaleYPos = (y - scrollTrack.AbsolutePosition.Y - offset)/scrollTrack.AbsoluteSize.Y
 		if newScaleYPos + relativeSize > 1 then
 			newScaleYPos = 1 - relativeSize
 			scrollBottom.Value = true
@@ -1448,11 +1448,11 @@ t.CreateTrueScrollingFrame = function()
 		local percentPosition = (scrollingFrame.AbsolutePosition.Y - lowY)/totalYSpan
 		scrollbar.Position = UDim2.new(scrollbar.Position.X.Scale,scrollbar.Position.X.Offset,percentPosition,-scrollbar.AbsoluteSize.X/2)
 
-		if scrollbar.AbsolutePosition.y < scrollTrack.AbsolutePosition.y then
+		if scrollbar.AbsolutePosition.Y < scrollTrack.AbsolutePosition.Y then
 			scrollbar.Position = UDim2.new(scrollbar.Position.X.Scale,scrollbar.Position.X.Offset,0,0)
 		end
 
-		if (scrollbar.AbsolutePosition.y + scrollbar.AbsoluteSize.Y) > (scrollTrack.AbsolutePosition.y + scrollTrack.AbsoluteSize.y) then
+		if (scrollbar.AbsolutePosition.Y + scrollbar.AbsoluteSize.Y) > (scrollTrack.AbsolutePosition.Y + scrollTrack.AbsoluteSize.Y) then
 			local relativeSize = scrollbar.AbsoluteSize.Y/scrollTrack.AbsoluteSize.Y
 			scrollbar.Position = UDim2.new(scrollbar.Position.X.Scale,scrollbar.Position.X.Offset,1 - relativeSize,0)
 		end
@@ -1480,17 +1480,15 @@ t.CreateTrueScrollingFrame = function()
 		end
 		reentrancyGuardScrollDown = false
 	end
-	
+
 	local scrollStamp = 0
 	local function scrollUp(mouseYPos)
 		if scrollUpButton.Active then
 			scrollStamp = tick()
 			local current = scrollStamp
-			local upCon
-			upCon = mouseDrag.MouseButton1Up:Connect(function()
+			upCon = mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				upCon:Disconnect()
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 			doScrollUp()
@@ -1499,7 +1497,7 @@ t.CreateTrueScrollingFrame = function()
 			local w = 0.1
 			while scrollStamp == current do
 				doScrollUp()
-				if mouseYPos and mouseYPos > scrollbar.AbsolutePosition.y then
+				if mouseYPos and mouseYPos > scrollbar.AbsolutePosition.Y then
 					break
 				end
 				if not scrollUpButton.Active then break end
@@ -1517,11 +1515,9 @@ t.CreateTrueScrollingFrame = function()
 		if scrollDownButton.Active then
 			scrollStamp = tick()
 			local current = scrollStamp
-			local downCon
-			downCon = mouseDrag.MouseButton1Up:Connect(function()
+			mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				downCon:Disconnect()
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 			doScrollDown()
@@ -1530,7 +1526,7 @@ t.CreateTrueScrollingFrame = function()
 			local w = 0.1
 			while scrollStamp == current do
 				doScrollDown()
-				if mouseYPos and mouseYPos < (scrollbar.AbsolutePosition.y + scrollbar.AbsoluteSize.x) then
+				if mouseYPos and mouseYPos < (scrollbar.AbsolutePosition.Y + scrollbar.AbsoluteSize.X) then
 					break
 				end
 				if not scrollDownButton.Active then break end
@@ -1547,7 +1543,7 @@ t.CreateTrueScrollingFrame = function()
 	scrollbar.MouseButton1Down:Connect(function(x,y)
 		if scrollbar.Active then
 			scrollStamp = tick()
-			local mouseOffset = y - scrollbar.AbsolutePosition.y
+			local mouseOffset = y - scrollbar.AbsolutePosition.Y
 			if dragCon then dragCon:Disconnect() dragCon = nil end
 			if upCon then upCon:Disconnect() upCon = nil end
 			local prevY = y
@@ -1562,11 +1558,10 @@ t.CreateTrueScrollingFrame = function()
 				reentrancyGuardMouseScroll = false
 
 			end)
-			upCon = mouseDrag.MouseButton1Up:Connect(function()
+			upCon = mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				dragCon:Disconnect(); dragCon = nil
-				upCon:Disconnect(); local drag = nil
+				if dragCon then dragCon:Disconnect() dragCon = nil end
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 		end
@@ -1972,7 +1967,7 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 
 		if not scrollDrag.Parent then return end
 
-		local dragSizeY = scrollDrag.Parent.AbsoluteSize.y * (1/(guiObjects - howManyDisplayed + 1))
+		local dragSizeY = scrollDrag.Parent.AbsoluteSize.Y * (1/(guiObjects - howManyDisplayed + 1))
 		if dragSizeY < 16 then dragSizeY = 16 end
 		scrollDrag.Size = UDim2.new(scrollDrag.Size.X.Scale,scrollDrag.Size.X.Offset,scrollDrag.Size.Y.Scale,dragSizeY)
 
@@ -1982,7 +1977,7 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 		local absYPos = 0
 
 		if relativeYPos ~= 0 then
-			absYPos = (relativeYPos * scrollbar.AbsoluteSize.y) - (relativeYPos * scrollDrag.AbsoluteSize.y)
+			absYPos = (relativeYPos * scrollbar.AbsoluteSize.Y) - (relativeYPos * scrollDrag.AbsoluteSize.Y)
 		end
 
 		scrollDrag.Position = UDim2.new(scrollDrag.Position.X.Scale,scrollDrag.Position.X.Offset,scrollDrag.Position.Y.Scale,absYPos)
@@ -2021,11 +2016,9 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 		if scrollUpButton.Active then
 			scrollStamp = tick()
 			local current = scrollStamp
-			local upCon
-			upCon = mouseDrag.MouseButton1Up:Connect(function()
+			mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				upCon:Disconnect()
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 			doScrollUp()
@@ -2034,7 +2027,7 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 			local w = 0.1
 			while scrollStamp == current do
 				doScrollUp()
-				if mouseYPos and mouseYPos > scrollDrag.AbsolutePosition.y then
+				if mouseYPos and mouseYPos > scrollDrag.AbsolutePosition.Y then
 					break
 				end
 				if not scrollUpButton.Active then break end
@@ -2052,11 +2045,9 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 		if scrollDownButton.Active then
 			scrollStamp = tick()
 			local current = scrollStamp
-			local downCon
-			downCon = mouseDrag.MouseButton1Up:Connect(function()
+			mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				downCon:Disconnect()
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 			doScrollDown()
@@ -2065,7 +2056,7 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 			local w = 0.1
 			while scrollStamp == current do
 				doScrollDown()
-				if mouseYPos and mouseYPos < (scrollDrag.AbsolutePosition.y + scrollDrag.AbsoluteSize.x) then
+				if mouseYPos and mouseYPos < (scrollDrag.AbsolutePosition.Y + scrollDrag.AbsoluteSize.X) then
 					break
 				end
 				if not scrollDownButton.Active then break end
@@ -2083,14 +2074,13 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 	scrollDrag.MouseButton1Down:Connect(function(x,y)
 		if scrollDrag.Active then
 			scrollStamp = tick()
-			local mouseOffset = y - scrollDrag.AbsolutePosition.y
+			local mouseOffset = y - scrollDrag.AbsolutePosition.Y
 			local dragCon
-			local upCon
 			dragCon = mouseDrag.MouseMoved:Connect(function(x,y)
-				local barAbsPos = scrollbar.AbsolutePosition.y
-				local barAbsSize = scrollbar.AbsoluteSize.y
+				local barAbsPos = scrollbar.AbsolutePosition.Y
+				local barAbsSize = scrollbar.AbsoluteSize.Y
 
-				local dragAbsSize = scrollDrag.AbsoluteSize.y
+				local dragAbsSize = scrollDrag.AbsoluteSize.Y
 				local barAbsOne = barAbsPos + barAbsSize - dragAbsSize
 				y = y - mouseOffset
 				y = y < barAbsPos and barAbsPos or y > barAbsOne and barAbsOne or y
@@ -2121,11 +2111,10 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 				scrollPosition = newScrollPosition
 				recalculate(nil)
 			end)
-			upCon = mouseDrag.MouseButton1Up:Connect(function()
+			mouseDrag.MouseButton1Up:Once(function()
 				scrollStamp = tick()
 				mouseDrag.Parent = nil
-				dragCon:Disconnect(); dragCon = nil
-				upCon:Disconnect(); local drag = nil
+				if dragCon then dragCon:Disconnect() dragCon = nil end
 			end)
 			mouseDrag.Parent = getLayerCollectorAncestor(scrollbar)
 		end
@@ -2155,9 +2144,9 @@ t.CreateScrollingFrame = function(orderList,scrollStyle)
 	end)
 	scrollbar.MouseButton1Down:Connect(
 		function(x,y)
-			if y > (scrollDrag.AbsoluteSize.y + scrollDrag.AbsolutePosition.y) then
+			if y > (scrollDrag.AbsoluteSize.Y + scrollDrag.AbsolutePosition.Y) then
 				scrollDown(y)
-			elseif y < (scrollDrag.AbsolutePosition.y) then
+			elseif y < (scrollDrag.AbsolutePosition.Y) then
 				scrollUp(y)
 			end
 		end)
@@ -3292,7 +3281,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 			indexCopy = index
 		end
 	end
-	
+
 	local rows = 0
 	local columns = 0
 	local function setSetIndex()
@@ -3305,7 +3294,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 		if contents then
 			-- remove our buttons and their connections
 			for i = 1, #insertButtons do
-				insertButtons[i]:remove()
+				insertButtons[i]:Destroy()
 			end
 			for i = 1, #insertButtonCons do
 				if insertButtonCons[i] then insertButtonCons[i]:Disconnect() end
@@ -3382,7 +3371,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 
 			if i == 1 then -- we will have this selected by default, so show it
 				button.Selected = true
-				button.BackgroundColor3 = Color3.new(0,204/255,0)
+				button.BackgroundColor3 = Color3.fromRGB(0,204,0)
 				button.TextColor3 = Color3.new(0,0,0)
 				button.BackgroundTransparency = 0
 			end
@@ -3402,7 +3391,7 @@ t.CreateSetPanel = function(userIdsForSets, objectSelected, dialogClosed, size, 
 			button.MouseButton1Click:Connect(function()
 				resetAllSetButtonSelection()
 				button.Selected = not button.Selected
-				button.BackgroundColor3 = Color3.new(0,204/255,0)
+				button.BackgroundColor3 = Color3.fromRGB(0,204,0)
 				button.TextColor3 = Color3.new(0,0,0)
 				button.BackgroundTransparency = 0
 				selectSet(button, button.Text, userCategoryButtons[i].SetId.Value, 0)
@@ -3560,7 +3549,7 @@ t.CreateTerrainMaterialSelector = function(size,position)
 		if choice == "Plastic (blue)" then return 16 end
 		if choice == "Water" then return 17 end
 	end
-	
+
 	local function getNameFromEnum(choice)
 		if choice == Enum.CellMaterial.Grass or choice == 1 then return "Grass"end
 		if choice == Enum.CellMaterial.Sand or choice == 2 then return "Sand" end 
@@ -3728,7 +3717,7 @@ t.CreateLoadingFrame = function(name,size,position)
 	local loadingBar = Instance.new("Frame")
 	loadingBar.Name = "LoadingBar"
 	loadingBar.BackgroundColor3 = Color3.new(0,0,0)
-	loadingBar.BorderColor3 = Color3.new(79/255,79/255,79/255)
+	loadingBar.BorderColor3 = Color3.fromRGB(79,79,79)
 	loadingBar.Position = UDim2.new(0,0,0,41)
 	loadingBar.Size = UDim2.new(1,0,0,30)
 	loadingBar.Parent = loadingFrame
@@ -3849,7 +3838,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 		button.Text =  text
 		button.TextColor3 = Color3.new(1,1,1)
 		button.BorderSizePixel = 0
-		button.BackgroundColor3 = Color3.new(20/255,20/255,20/255)
+		button.BackgroundColor3 = Color3.fromRGB(20,20,20)
 
 		button.MouseEnter:Connect(function ( )
 			if button.Selected then return end
@@ -3866,7 +3855,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 
 	local dragBar = Instance.new("Frame",parent)
 	dragBar.Name = tostring(name) .. "DragBar"
-	dragBar.BackgroundColor3 = Color3.new(39/255,39/255,39/255)
+	dragBar.BackgroundColor3 = Color3.fromRGB(39,39,39)
 	dragBar.BorderColor3 = Color3.new(0,0,0)
 	if size then
 		dragBar.Size =  UDim2.new(size.X.Scale,size.X.Offset,0,20)  + UDim2.new(0,20,0,0)
@@ -3879,10 +3868,10 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 	dragBar.Active = true
 	--dragBar.Visible = false
 	dragBar.MouseEnter:Connect(function (  )
-		dragBar.BackgroundColor3 = Color3.new(49/255,49/255,49/255)
+		dragBar.BackgroundColor3 = Color3.fromRGB(49,49,49)
 	end)
 	dragBar.MouseLeave:Connect(function (  )
-		dragBar.BackgroundColor3 = Color3.new(39/255,39/255,39/255)
+		dragBar.BackgroundColor3 = Color3.fromRGB(39,39,39)
 	end)
 
 	-- plugin name label
@@ -3944,7 +3933,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 
 	local minimizeFrame = Instance.new("Frame",dragBar)
 	minimizeFrame.Name = "MinimizeFrame"
-	minimizeFrame.BackgroundColor3 = Color3.new(73/255,73/255,73/255)
+	minimizeFrame.BackgroundColor3 = Color3.fromRGB(73,73,73)
 	minimizeFrame.BorderColor3 = Color3.new(0,0,0)
 	minimizeFrame.Position = UDim2.new(0,0,1,0)
 	if size then
@@ -3966,7 +3955,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 
 	local separatingLine = Instance.new("Frame",dragBar)
 	separatingLine.Name = "SeparatingLine"
-	separatingLine.BackgroundColor3 = Color3.new(115/255,115/255,115/255)
+	separatingLine.BackgroundColor3 = Color3.fromRGB(115,115,115)
 	separatingLine.BorderSizePixel = 0
 	separatingLine.Position = UDim2.new(1,-18,0.5,-7)
 	separatingLine.Size = UDim2.new(0,1,0,14)
@@ -3982,7 +3971,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 	widgetContainer.BorderColor3 = Color3.new(0,0,0)
 	if not scrollable then
 		widgetContainer.BackgroundTransparency = 0
-		widgetContainer.BackgroundColor3 = Color3.new(72/255,72/255,72/255)
+		widgetContainer.BackgroundColor3 = Color3.fromRGB(72,72,72)
 	end
 
 	if size then
@@ -4007,12 +3996,12 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 		--frame for widgets
 		frame,control = t.CreateTrueScrollingFrame()
 		frame.Size = UDim2.new(1, 0, 1, 0)
-		frame.BackgroundColor3 = Color3.new(72/255,72/255,72/255)
+		frame.BackgroundColor3 = Color3.fromRGB(72,72,72)
 		frame.BorderColor3 = Color3.new(0,0,0)
 		frame.Active = true
 		frame.Parent = widgetContainer
 		control.Parent = dragBar
-		control.BackgroundColor3 = Color3.new(72/255,72/255,72/255)
+		control.BackgroundColor3 = Color3.fromRGB(72,72,72)
 		control.BorderSizePixel = 0
 		control.BackgroundTransparency = 0
 		control.Position = UDim2.new(1,-21,1,1)
@@ -4034,7 +4023,7 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 		verticalDragger.ZIndex = 2
 		verticalDragger.AutoButtonColor = false
 		verticalDragger.Name = "VerticalDragger"
-		verticalDragger.BackgroundColor3 = Color3.new(50/255,50/255,50/255)
+		verticalDragger.BackgroundColor3 = Color3.fromRGB(50,50,50)
 		verticalDragger.BorderColor3 = Color3.new(0,0,0)
 		verticalDragger.Size = UDim2.new(1,20,0,20)
 		verticalDragger.Position = UDim2.new(0,0,1,0)
@@ -4068,10 +4057,10 @@ t.CreatePluginFrame = function (name,size,position,scrollable,parent)
 		local draggingVertical = false
 		local startYPos = nil
 		verticalDragger.MouseEnter:Connect(function ()
-			verticalDragger.BackgroundColor3 = Color3.new(60/255,60/255,60/255)
+			verticalDragger.BackgroundColor3 = Color3.fromRGB(60,60,60)
 		end)
 		verticalDragger.MouseLeave:Connect(function ()
-			verticalDragger.BackgroundColor3 = Color3.new(50/255,50/255,50/255)
+			verticalDragger.BackgroundColor3 = Color3.fromRGB(50,50,50)
 		end)
 		verticalDragger.MouseButton1Down:Connect(function(x,y)
 			draggingVertical = true
