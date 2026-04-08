@@ -818,7 +818,7 @@ t.SetupStamperDragger = function(modelToStamp, Mouse, StampInModel, AllowedStamp
 	local mouseTarget = nil
 
 	local errorBox = Instance.new("SelectionBox")
-	errorBox.Color3 = BrickColor.new("Bright red")
+	errorBox.Color3 = BrickColor.new("Bright red").Color
 	errorBox.Transparency = 0
 	errorBox.Archivable = false
 
@@ -830,7 +830,7 @@ t.SetupStamperDragger = function(modelToStamp, Mouse, StampInModel, AllowedStamp
 	adornPart.Archivable = false
 
 	local adorn = Instance.new("SelectionBox")
-	adorn.Color3 = BrickColor.new("Toothpaste")
+	adorn.Color3 = BrickColor.new("Toothpaste").Color
 	adorn.Adornee = adornPart
 	adorn.Visible = true
 	adorn.Transparency = 0
